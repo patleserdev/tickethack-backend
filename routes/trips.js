@@ -29,7 +29,15 @@ const Trip = require('../models/trips');
         }
         ).then((data) => {
             
-            res.json({result:true, trips : data})
+            if (data != null)
+            {
+                res.json({result:true, trips : data})
+            }
+            else
+            {
+                res.json({result:false, error : "pas de trajet avec ces villes"})
+            }
+            
         })
     }
     else
