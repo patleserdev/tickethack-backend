@@ -8,12 +8,15 @@ const Cart = require('../models/carts');
  * 	Ajout trajet au panier avec paramètres id
  * 	{result}
  */
-router.post('/cart/add', (req, res) => {
+router.post('/add', (req, res) => {
     if (checkBody(req.body,['tripId']))
     {
        
        newCart= new Cart({tripId : req.body.tripId}) 
-   
+        newCart.save().then((data) => {
+
+            res.json({result:true,data:data})  
+        })
     }
     else
     {

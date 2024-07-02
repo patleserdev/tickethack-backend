@@ -29,12 +29,12 @@ const Trip = require('../models/trips');
         }
         ).then((data) => {
             
-            res.json({trips : data})
+            res.json({result:true, trips : data})
         })
     }
     else
     {
-        res.json({result:false,error:'Champs manquants ou invalides'})
+        res.json({result:false, error:'Champs manquants ou invalides'})
     }
 })
 	
