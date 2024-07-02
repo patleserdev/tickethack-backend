@@ -5,6 +5,7 @@ const Cart = require('../models/carts');
 const Trip = require('../models/trips');
 
 const { checkBody } = require('../modules/checkBody');
+
 /**
  * 	Ajout trajet au panier avec paramètres id
  * 	{result}
@@ -12,7 +13,7 @@ const { checkBody } = require('../modules/checkBody');
 router.post('/add', (req, res) => {
     if (checkBody(req.body,['tripId']))
     {
-       newCart= new Cart({trip : req.body.tripId}) 
+       let newCart= new Cart({trip : req.body.tripId}) 
         newCart.save().then((data) => {
             if(data != null)
             {
@@ -36,7 +37,7 @@ router.post('/add', (req, res) => {
  * 	{result, cart}
  */
 router.get('/', (req, res) => {
-
+c
     Cart.find({}).populate('trip').then((data => {
 
         if (data != null)
