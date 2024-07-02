@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const bookingSchema = mongoose.Schema({
-	tripId : Number
+	trip : {type: mongoose.Schema.Types.ObjectId, ref: 'Trips'}
 	
 });
 

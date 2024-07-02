@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const Cart = require('../models/carts');
+const Trip = require('../models/trips');
 
 const { checkBody } = require('../modules/checkBody');
 /**
@@ -11,7 +12,7 @@ const { checkBody } = require('../modules/checkBody');
 router.post('/add', (req, res) => {
     if (checkBody(req.body,['tripId']))
     {
-       newCart= new Cart({tripId : req.body.tripId}) 
+       newCart= new Cart({trip : req.body.tripId}) 
         newCart.save().then((data) => {
             if(data != null)
             {
@@ -34,14 +35,45 @@ router.post('/add', (req, res) => {
  * 	Récupérer tous les éléments du panier
  * 	{result, cart}
  */
+router.get('/', (req, res) => {
+
+    Cart.find({}).populate('trip').then((data => {
+
+        if (data != null)
+        {
+            res.json({result:true, carts : data})
+        }
+        else
+        {
+            res.json({result:false, error : "Pas de données"})
+        }
+    }))
+})
+
+/**
+ * 	DeleteOne du panier
+ */
+router.delete('/deleteone/:cartId', (req, res) => {
+
+    Cart.deleteOne({_id : req.params.cartId }).then((data => {
+
+        res.json({result:true})
+    }))
+})
+
 
 /**
  * 	DeleteAll du panier
  */
+router.delete('/deleteall', (req, res) => {
 
-// router.post('/signin', (req, res) => {
-// }
-	
+    Cart.deleteMany({}).then((data => {
+
+        res.json({result:true})
+    }))
+})
+
+
 
 
 
