@@ -3,7 +3,7 @@ var router = express.Router();
 
 const Cart = require('../models/carts');
 
-
+const { checkBody } = require('../modules/checkBody');
 /**
  * 	Ajout trajet au panier avec paramètres id
  * 	{result}
@@ -11,11 +11,16 @@ const Cart = require('../models/carts');
 router.post('/add', (req, res) => {
     if (checkBody(req.body,['tripId']))
     {
-       
        newCart= new Cart({tripId : req.body.tripId}) 
         newCart.save().then((data) => {
-
-            res.json({result:true,data:data})  
+            if(data != null)
+            {
+                res.json({result:true})
+            }
+            else
+            {
+                res.json({result:false,error:'Erreur lors de l\'enregistement'})
+            }        
         })
     }
     else

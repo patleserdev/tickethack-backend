@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const cartSchema = mongoose.Schema({
-	tripId : Number
+	tripId : String
 	
 });
 
