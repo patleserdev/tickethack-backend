@@ -29,7 +29,7 @@ const Trip = require('../models/trips');
         }
         ).then((data) => {
             
-            if (data != null)
+            if (data.length != 0)
             {
                 res.json({result:true, trips : data})
             }
