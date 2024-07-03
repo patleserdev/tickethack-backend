@@ -37,7 +37,7 @@ router.post('/add', (req, res) => {
  * 	{result, cart}
  */
 router.get('/', (req, res) => {
-c
+
     Cart.find({}).populate('trip').then((data => {
 
         if (data != null)

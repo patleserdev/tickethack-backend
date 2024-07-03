@@ -28,7 +28,7 @@ const Trip = require('../models/trips');
             date: {"$gte": `${searchDate}`, "$lt": `${nextDate}`} 
         }
         ).then((data) => {
-            
+            console.log(data)
             if (data.length != 0)
             {
                 res.json({result:true, trips : data})
