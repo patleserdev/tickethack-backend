@@ -3,6 +3,7 @@ var router = express.Router();
 
 const Cart = require('../models/carts');
 const Trip = require('../models/trips');
+const User = require('../models/users');
 
 const { checkBody } = require('../modules/checkBody');
 

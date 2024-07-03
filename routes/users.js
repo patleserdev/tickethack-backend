@@ -67,6 +67,36 @@ router.get('/bookings/:username', (req, res) => {
 })
 
 /**
+ * Update user cart
+ */
+router.get('/cart/:username', (req, res) => {
+    const username = req.params.username;
+    if (username)
+    {
+        //Recherche user        
+        User.find({
+            name:{ $regex: new RegExp(username, 'i') }
+        }
+        ).then((data) => {
+            console.log(data)
+            if (data.length != 0)
+            {
+                res.json({result:true, cart : data.cart})
+            }
+            else
+            {
+                res.json({result:false, error : "L'utilisateur n'existe pas"})
+            }
+            
+        })
+    }
+    else
+    {
+        res.json({result:false, error:'Champs manquants ou invalides'})
+    }
+})
+
+/**
  * 	Login user
  */
  router.post('/login', (req, res) => {
