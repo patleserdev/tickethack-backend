@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
     email: String,
     password: String,
 	cart: {type: mongoose.Schema.Types.ObjectId, ref: 'carts'},
-	bookings: {type: mongoose.Schema.Types.ObjectId, ref: 'bookings'},
+	bookings: [{type: mongoose.Schema.Types.ObjectId, ref: 'bookings'}],
 	
 });
 
