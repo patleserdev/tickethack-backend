@@ -35,28 +35,21 @@ router.post('/add', (req, res) => {
  * 	{result}
  */
 router.post('/addMany', (req, res) => {
-    if (checkBody(req.body,['tripId']))
+    req.body.tripIds
+    if (checkBody(req.body,['tripIds']))
     {
-        let trips=req.body.tripIds
         let counter=0
-        for(let trip of trips)
-        {
-            let newBooking= new Booking({trip : trip}) 
-            newBooking.save().then((data) => {
-                console.log(data)
-                counter++
-            })
-        }
-      
-       
-            if(counter != null)
+        let trips=req.body.tripIds
+        Booking.insertMany(req.body.tripIds).then((data) => {
+            if(data != null)
             {
-                res.json({result:true})
+                res.json({result:true,message:'Multiple enregistrement effectué'})
             }
             else
             {
                 res.json({result:false,error:'Erreur lors des enregistements'})
-            }        
+            }  
+        })
        
     }
     else
