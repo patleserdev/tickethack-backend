@@ -43,7 +43,7 @@ router.post('/addMany', (req, res) => {
         Booking.insertMany(req.body.tripIds).then((data) => {
             if(data != null)
             {
-                res.json({result:true,message:'Multiple enregistrement effectué'})
+                res.json({result:true,message:'Multiple enregistrement effectué !'})
             }
             else
             {
